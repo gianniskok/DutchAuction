@@ -99,11 +99,6 @@ contract DutchAuction {
         contractstate = ContractState.CLOSED;        
     }
 
-    function selfDestruct() external onlyOwner {
-        require(contractstate == ContractState.CLOSED, "Auction still running");
-        selfdestruct(owner);
-
-    }
 
     function balance() external view returns (uint){
         uint256 balances =  IERC20(_tokenContract).balanceOf(msg.sender);
