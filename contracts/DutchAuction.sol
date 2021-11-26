@@ -6,7 +6,7 @@ import "hardhat/console.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract DutchAuction {
-    address constant  _tokenContract = 0x5FbDB2315678afecb367f032d93F642f64180aa3;
+    address constant  _tokenContract = 0x5FbDB2315678afecb367f032d93F642f64180aa3; //0xe7f1725e7734ce288f8367e1bb143e90bb3f0512 on deployment
     address payable owner;
     uint256 startDate;
     uint256 endDate;
