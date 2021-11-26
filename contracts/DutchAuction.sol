@@ -46,6 +46,15 @@ contract DutchAuction {
         _;
     }
 
+    modifier conditionmet() {
+        bool con = false;
+        if(totalSupply == 0 || endDate <= block.timestamp){
+            con = true;
+        }
+        require(con, "Requirements not yet met");
+        _;
+    }
+
     function transferTokensToContract() external onlyOwner{
         IERC20(_tokenContract).transferFrom(msg.sender, address(this),totalSupply);
     }
@@ -75,14 +84,12 @@ contract DutchAuction {
             totalSupply = 0;
         }
 
-        if(totalSupply == 0){
+        if(totalSupply == 0 ){
             sendFunds(currentPrice);
-        }
-        
+        } 
     }
     
-    function sendFunds(uint256 _endingPrice) public payable  {
-        require(totalSupply == 0, "Not all tokens are sold");
+    function sendFunds(uint256 _endingPrice) public payable conditionmet {
         for(uint72 i =0; i<newRes.length; i++){
             address payable sender = newRes[i].sender;
             IERC20(_tokenContract).transfer(newRes[i].sender , newRes[i].ammount); 
